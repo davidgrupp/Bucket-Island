@@ -1,0 +1,32 @@
+body{
+	background-color: #eee;
+}
+
+.navbar{
+	background-color: white;
+	background-image: none;
+	border-color: transparent;
+	box-shadow: 0px 0px 16px #aaa;
+	position: fixed;
+	margin-bottom: 0px;
+}
+
+.navbar h2{
+	/*font-size: 1px;*/
+	font-weight: bolder;
+}
+
+.navbar .container{
+	margin-left: 24px;
+	height: 100px;
+	width: 92%;
+}
+
+.navbar .fa-home{
+	font-size: 50px;
+	color: #333;
+}
+
+.island{
+	position:absolute;
+}

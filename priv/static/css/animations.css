@@ -1,0 +1,80 @@
+@keyframes resize1 {
+	0% {transform: scale(.75,.75);}
+	50% {transform: scale(1.5,1.5);} 
+	100% {transform: scale(.75,.75);}
+}
+
+@keyframes rotate1 {
+	from {transform: rotate(0deg);}
+	to {transform: rotate(360deg);} 
+}
+
+@keyframes resizeAndRotate1 {
+	0% {transform: scale(.75,.75) rotate(0deg);}
+	50% {transform: scale(1.5,1.5) rotate(180deg);} 
+	100% {transform: scale(.75,.75) rotate(360deg);}
+}
+
+@keyframes move1 {
+	to {left:50%; top:100%;} 
+}
+
+@keyframes move2 {
+	to {left:50%; top:-50%;} 
+}
+
+@keyframes move2 {
+	to {left:100%; top:50%;} 
+}
+
+@keyframes move2 {
+	to {left:-50%; top:50%;} 
+}
+
+@keyframes tour1 {
+	0% {left:30%; top:0%;}
+	25% {left:0%; top:30%;} 
+	50% {left:60%; top:90%;} 
+	75% {left:95%; top:60%;} 
+	100% {left:30%; top:0%;} 
+}
+
+@keyframes tour2 {
+	0% {left:70%; top:0%;}
+	25% {left:0%; top:50%;} 
+	50% {left:30%; top:90%;} 
+	75% {left:95%; top:30%;} 
+	100% {left:70%; top:0%;} 
+}
+
+@keyframes tour3 {
+	0% {left:70%; top:0%;}
+	25% {left:0%; top:50%;} 
+	50% {left:30%; top:90%;} 
+	75% {left:95%; top:30%;} 
+	100% {left:70%; top:0%;} 
+}
+
+@keyframes tour4 {
+	0% {left:30%; top:0%;}
+	25% {left:95%; top:60%;} 
+	50% {left:60%; top:90%;}
+	75% {left:0%; top:30%;}  
+	100% {left:30%; top:0%;} 
+}
+
+@keyframes tour5 {
+	0% {left:70%; top:0%;}
+	25% {left:95%; top:30%;} 
+	50% {left:30%; top:90%;} 
+	75% {left:0%; top:50%;} 
+	100% {left:70%; top:0%;} 
+}
+
+@keyframes tour6 {
+	0% {left:70%; top:0%;}
+	25% {left:95%; top:30%;} 
+	50% {left:30%; top:90%;} 
+	75% {left:0%; top:50%;} 
+	100% {left:70%; top:0%;} 
+}
