@@ -1,10 +1,6 @@
 <link rel="stylesheet" href="<%= static_path(@conn, "/css/animations.css") %>">
 
-<div class="navbar navbar-fixed-top">
-	<div class="container">
-		<h2>Bucket Island   <img src="" /><a href="#!/" style="float: right;"><i class="fa fa-home fa-fw" aria-hidden="true"></i></a></h2>
-	</div>
-</div>
+
 <div class="main">
 </div>
 <script src="<%= static_path(@conn, "/js/island.js") %>"></script>

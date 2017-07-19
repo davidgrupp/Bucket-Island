@@ -30,3 +30,23 @@ body{
 .island{
 	position:absolute;
 }
+
+
+svg.svgtext {
+	margin: 100px;
+	padding: 50px;
+	height:100%;
+ 	width:100%;
+	font-size: 100px; 
+  	text-transform:uppercase;
+	font-weight:bolder;
+	position: fixed;
+	z-index: 0;
+}
+
+#text { 
+  	fill: url(#img1);
+	stroke:black; 
+	  stroke-width:0;
+}
+#text:hover{filter:url(#dropshadow)}
