@@ -1,3 +1,3 @@
-defmodule Bucketisland.PageView do
-  use Bucketisland.Web, :view
+defmodule BucketIsland.PageView do
+  use BucketIsland.Web, :view
 end

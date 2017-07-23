@@ -1,3 +1,3 @@
-defmodule Bucketisland.LayoutViewTest do
-  use Bucketisland.ConnCase, async: true
+defmodule BucketIsland.LayoutViewTest do
+  use BucketIsland.ConnCase, async: true
 end

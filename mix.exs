@@ -1,4 +1,4 @@
-defmodule Bucketisland.Mixfile do
+defmodule BucketIsland.Mixfile do
   use Mix.Project
 
   def project do
@@ -16,7 +16,7 @@ defmodule Bucketisland.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Bucketisland, []},
+    [mod: {BucketIsland, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
   end
 

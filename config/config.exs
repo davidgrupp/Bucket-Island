@@ -6,11 +6,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :bucketisland, Bucketisland.Endpoint,
+config :bucketisland, BucketIsland.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "rZFKfOhvKxv2W1qOVoLRJtr3d+CfbWjCp33sx4dMixA9VkYRWnmd369AHuwo+Hwg",
-  render_errors: [view: Bucketisland.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Bucketisland.PubSub,
+  render_errors: [view: BucketIsland.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: BucketIsland.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

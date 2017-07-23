@@ -1,12 +1,12 @@
-defmodule Bucketisland.Web do
+defmodule BucketIsland.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Bucketisland.Web, :controller
-      use Bucketisland.Web, :view
+      use BucketIsland.Web, :controller
+      use BucketIsland.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -26,8 +26,8 @@ defmodule Bucketisland.Web do
     quote do
       use Phoenix.Controller
 
-      import Bucketisland.Router.Helpers
-      import Bucketisland.Gettext
+      import BucketIsland.Router.Helpers
+      import BucketIsland.Gettext
     end
   end
 
@@ -41,9 +41,9 @@ defmodule Bucketisland.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Bucketisland.Router.Helpers
-      import Bucketisland.ErrorHelpers
-      import Bucketisland.Gettext
+      import BucketIsland.Router.Helpers
+      import BucketIsland.ErrorHelpers
+      import BucketIsland.Gettext
     end
   end
 
@@ -56,7 +56,7 @@ defmodule Bucketisland.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import Bucketisland.Gettext
+      import BucketIsland.Gettext
     end
   end
 

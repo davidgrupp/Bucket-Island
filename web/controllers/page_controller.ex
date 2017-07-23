@@ -1,5 +1,5 @@
-defmodule Bucketisland.PageController do
-  use Bucketisland.Web, :controller
+defmodule BucketIsland.PageController do
+  use BucketIsland.Web, :controller
 
   def index(conn, _params) do
     render conn, "index.html"

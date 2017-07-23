@@ -1,3 +1,3 @@
-defmodule Bucketisland.PageViewTest do
-  use Bucketisland.ConnCase, async: true
+defmodule BucketIsland.PageViewTest do
+  use BucketIsland.ConnCase, async: true
 end

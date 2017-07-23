@@ -1,4 +1,4 @@
-defmodule Bucketisland.ChannelCase do
+defmodule BucketIsland.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -22,7 +22,7 @@ defmodule Bucketisland.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint Bucketisland.Endpoint
+      @endpoint BucketIsland.Endpoint
     end
   end
 

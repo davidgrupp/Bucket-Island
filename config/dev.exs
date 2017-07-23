@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :bucketisland, Bucketisland.Endpoint,
+config :bucketisland, BucketIsland.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -15,7 +15,7 @@ config :bucketisland, Bucketisland.Endpoint,
 
 
 # Watch static and templates for browser reloading.
-config :bucketisland, Bucketisland.Endpoint,
+config :bucketisland, BucketIsland.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},

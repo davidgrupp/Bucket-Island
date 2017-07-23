@@ -1,5 +1,5 @@
-defmodule Bucketisland.Router do
-  use Bucketisland.Web, :router
+defmodule BucketIsland.Router do
+  use BucketIsland.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule Bucketisland.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Bucketisland do
+  scope "/", BucketIsland do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
@@ -23,4 +23,8 @@ defmodule Bucketisland.Router do
   # scope "/api", Bucketisland do
   #   pipe_through :api
   # end
+
+  socket "/fill", BucketIsland do
+     channel "fill:*", FillChannel
+   end
 end

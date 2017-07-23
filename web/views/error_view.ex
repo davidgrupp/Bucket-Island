@@ -1,5 +1,5 @@
-defmodule Bucketisland.ErrorView do
-  use Bucketisland.Web, :view
+defmodule BucketIsland.ErrorView do
+  use BucketIsland.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

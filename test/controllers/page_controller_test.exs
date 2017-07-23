@@ -1,5 +1,5 @@
-defmodule Bucketisland.PageControllerTest do
-  use Bucketisland.ConnCase
+defmodule BucketIsland.PageControllerTest do
+  use BucketIsland.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

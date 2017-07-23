@@ -1,4 +1,4 @@
-defmodule Bucketisland.ErrorHelpers do
+defmodule BucketIsland.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Bucketisland.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Bucketisland.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(BucketIsland.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Bucketisland.Gettext, "errors", msg, opts)
+      Gettext.dgettext(BucketIsland.Gettext, "errors", msg, opts)
     end
   end
 end

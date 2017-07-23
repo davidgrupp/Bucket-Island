@@ -1,4 +1,4 @@
-# Bucketisland
+# BucketIsland
 
 To start your Phoenix app:
 

@@ -1,3 +1,3 @@
-defmodule Bucketisland.LayoutView do
-  use Bucketisland.Web, :view
+defmodule BucketIsland.LayoutView do
+  use BucketIsland.Web, :view
 end

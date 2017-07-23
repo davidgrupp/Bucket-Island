@@ -1,4 +1,4 @@
-defmodule Bucketisland.ConnCase do
+defmodule BucketIsland.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,10 +20,10 @@ defmodule Bucketisland.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      import Bucketisland.Router.Helpers
+      import BucketIsland.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Bucketisland.Endpoint
+      @endpoint BucketIsland.Endpoint
     end
   end
 

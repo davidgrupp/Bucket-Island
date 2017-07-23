@@ -1,7 +1,7 @@
-defmodule Bucketisland.Endpoint do
+defmodule BucketIsland.Endpoint do
   use Phoenix.Endpoint, otp_app: :bucketisland
 
-  socket "/socket", Bucketisland.UserSocket
+  socket "/socket", BucketIsland.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule Bucketisland.Endpoint do
     key: "_bucketisland_key",
     signing_salt: "B5Qu39dF"
 
-  plug Bucketisland.Router
+  plug BucketIsland.Router
 end
