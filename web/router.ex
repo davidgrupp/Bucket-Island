@@ -24,7 +24,5 @@ defmodule BucketIsland.Router do
   #   pipe_through :api
   # end
 
-  socket "/fill", BucketIsland do
-     channel "fill:*", FillChannel
-   end
+
 end

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<%= static_path(@conn, "/css/animations.css") %>">
 
+<input id="message-input" type="text" />
 
 <div class="main">
 </div>

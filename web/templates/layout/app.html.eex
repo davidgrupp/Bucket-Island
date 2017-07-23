@@ -16,20 +16,10 @@
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   	<!-- Latest compiled and minified JavaScript -->
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="<%= static_path(@conn, "/js/phoenix.js") %>"></script>
   </head>
 
   <body>
-  <svg class="svgtext">
-    <defs>
-      <pattern id="img1" patternUnits="userSpaceOnUse" width="100px" height="100px">
-        <image xlink:href="http://localhost:4000/images/bi_lrg.jpg" x="0" y="0" width="100px" height="100px" />
-      </pattern>
-    </defs>
-    <text id="text" y="10%" x="0px">
-      <tspan x="0" dy="1.2em">Bucket Island</tspan>
-      <tspan x="0" dy="1.2em">Best Island</tspan>
-    </text>
-  </svg>
     <div class="container">
       <div class="navbar navbar-fixed-top">
         <div class="container">
@@ -37,7 +27,7 @@
         </div>
       </div>
 
-      <main role="main">
+      <main role="main" style="margin-top:150px;">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
