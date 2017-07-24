@@ -50,3 +50,10 @@ svg.svgtext {
 	  stroke-width:0;
 }
 #text:hover{filter:url(#dropshadow)}
+
+
+.main{
+	margin-top: 100px;
+	width: 100%;
+	background-color: #0cc;
+}
