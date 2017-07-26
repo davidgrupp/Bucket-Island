@@ -1,29 +1,72 @@
 defmodule OptionCalc.Utilities.GenDataCache do
-  
+    use GenServer
+    
     @timeout 1000
 
     def start_link() do
         # get initiall values
-        {:ok, pid} = Agent.start_link(fn-> %{ total_bucket_island: 0, total_other: 0 } end, name: __MODULE__)
-        :timer.send_interval(@timeout, :commit)
+        {:ok, pid} = GenServer.start_link(__MODULE__, :ok, opts)
+        :timer.send_interval(@timeout, pid, :commit)
+        {:ok, pid}
     end
 
-    def get_value_async(process, key, query) do
-        cached = Agent.get(process, fn x -> x[key] end)
+    def handle_call(:totals, _from, ${
+        total_bucket_island: total_bucket_island,
+        total_other_island: total_other_island,
+        total_swamp: total_swamp,
+        total_forest: total_forest,
+        total_plains: total_plains,
+        total_mountain: total_mountain,
+    } = totals) do
+        {:reply, totals, totals}
     end
 
-    def get_value(process, query) do
-        cached = Agent.get(process, fn x -> x end)
+    def handle_cast(:commit, ${
+        total_bucket_island: total_bucket_island,
+        total_other_island: total_other_island,
+        total_swamp: total_swamp,
+        total_forest: total_forest,
+        total_plains: total_plains,
+        total_mountain: total_mountain,
+    } = totals) do
+        # commit totals to dynamo
+        {:noreply, totals}
     end
 
-    def set_value(process, value) do
-        cached_value = %{ value: value, cached_on: DateTime.utc_now, status: :ready }
-        Agent.update(process, fn state -> Map.put(state, key, cached_value) end)
+    def increment_bucket_island(pid, increment), do GenServer.cast(pid, {:increment_bucket_island, increment})
+    def increment_other_island(pid, increment), do GenServer.cast(pid, {:increment_other_island, increment})
+    def increment_swamp(pid, increment), do GenServer.cast(pid, {:increment_swamp, increment})
+    def increment_forest(pid, increment), do GenServer.cast(pid, {:increment_forest, increment})
+    def increment_plains(pid, increment), do GenServer.cast(pid, {:increment_plains, increment})
+    def increment_mountain(pid, increment), do GenServer.cast(pid, {:increment_mountain, increment})
+
+    def handle_cast({:increment_bucket_island, increment}, ${ total_bucket_island: total_bucket_island } = totals) do
+        updated_totals = Map.update(totals, :total_bucket_island, &(&1 + increment))
+        {:noreply, updated_totals}
     end
 
-    def is_valid(cached_data) do
-        cached_on = cached_data.cached_on |> DateTime.to_unix
-        cached_on + @timeout > DateTime.utc_now |> DateTime.to_unix
+    def handle_cast({:increment_other_island, increment}, ${ total_other_island: total_other_island } = totals) do
+        updated_totals = Map.update(totals, :total_other_island, &(&1 + increment))
+        {:noreply, updated_totals}
     end
 
+    def handle_cast({:increment_swamp, increment}, ${ total_swamp: total_swamp } = totals) do
+        updated_totals = Map.update(totals, :total_swamp, &(&1 + increment))
+        {:noreply, updated_totals}
+    end
+
+    def handle_cast({:increment_forest, increment}, ${ total_forest: total_forest } = totals) do
+        updated_totals = Map.update(totals, :total_forest, &(&1 + increment))
+        {:noreply, updated_totals}
+    end
+
+    def handle_cast({:increment_plains, increment}, ${ total_plains: total_plains } = totals) do
+        updated_totals = Map.update(totals, :total_plains, &(&1 + increment))
+        {:noreply, updated_totals}
+    end
+
+    def handle_cast({:increment_mountain, increment}, ${ total_mountain: total_mountain } = totals) do
+        updated_totals = Map.update(totals, :total_mountain, &(&1 + increment))
+        {:noreply, updated_totals}
+    end
 end
