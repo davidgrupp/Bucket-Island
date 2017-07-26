@@ -17,7 +17,7 @@ defmodule BucketIsland.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {BucketIsland, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext, :ex_aws, :hackney, :poison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,6 +33,9 @@ defmodule BucketIsland.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+      {:ex_aws, "~> 1.0"},
+      {:poison, "~> 2.0"},
+      {:hackney, "~> 1.6"}]
   end
 end
