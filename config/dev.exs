@@ -32,4 +32,14 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
-import_config "prod.secret.exs"
+config :ex_aws,
+  debug_requests: true,
+  region: "us-west-2"
+
+config :ex_aws, :dynamodb,
+  scheme: "https://",
+  host: "dynamodb.us-west-2.amazonaws.com",
+  port: 443,
+  region: "us-west-2"
+
+import_config "dev.secret.exs"
