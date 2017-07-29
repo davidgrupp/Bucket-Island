@@ -34,8 +34,9 @@ defmodule BucketIsland.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-      {:ex_aws, "~> 1.0"},
-      {:poison, "~> 2.0"},
-       {:hackney, "== 1.8.0", override: true}]
+     {:ex_aws, "~> 1.0"},
+     {:poison, "~> 2.0"},
+     {:hackney, "== 1.8.0", override: true},
+     {:uuid, "~> 1.1"}]
   end
 end

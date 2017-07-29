@@ -1,41 +1,34 @@
 defmodule BucketIsland.Repositories.ClicksRepository do
-    use GenServer
-
-    def start_link() do
-        GenServer.start_link(__MODULE__, {})
-    end
-
-    def get(pid), do: GenServer.call(pid, :get)
-    def create(pid, clicks), do: GenServer.cast(pid, {:create, clicks})
-
-    def handle_call(:get, _from, clicks) do
-        #[first|_] = 
-        x =    ExAws.Dynamo.query("Clicks",
+    def get_current() do
+        %{"Items" => [result]} =
+            ExAws.Dynamo.query("Clicks",
                 limit: 1,
                 scan_index_forward: false,
                 key_condition_expression: "part = :part",
                 expression_attribute_values: [part: 1],
                 index_name: "part-total_clicks-index")
             |> ExAws.request!
-        IO.inspect x
 
-        #first_clicks = %BucketIsland.Models.ClickTotals{
-        #    id: first["id"]["S"] |> String.to_integer,
-        #    total_bucket_island: first["total_bucket_island"]["N"] |> String.to_integer,
-        #    total_other_island: first["total_other_island"]["N"] |> String.to_integer,
-        #    total_swamp: first["total_swamp"]["N"] |> String.to_integer,
-        #    total_forest: first["total_forest"]["N"] |> String.to_integer,
-        #    total_plains: first["total_plains"]["N"] |> String.to_integer,
-        #    total_mountain: first["total_mountain"]["N"] |> String.to_integer
-        #    }
-        {:reply, x, clicks}
+        %BucketIsland.Models.ClickTotals{
+            total_bucket_island: result["total_bucket_island"]["N"] |> String.to_integer,
+            total_other_island: result["total_other_island"]["N"] |> String.to_integer,
+            total_swamp: result["total_swamp"]["N"] |> String.to_integer,
+            total_forest: result["total_forest"]["N"] |> String.to_integer,
+            total_plains: result["total_plains"]["N"] |> String.to_integer,
+            total_mountain: result["total_mountain"]["N"] |> String.to_integer,
+            total_clicks: result["total_clicks"]["N"] |> String.to_integer
+        }
     end
 
-    def handle_cast({:create, clicks}, totals) do
-        totals = BucketIsland.Models.ClickTotals.update_total_clicks(totals)
+    def create(clicks) do
+        clicks = BucketIsland.Models.ClickTotals.update_total_clicks(clicks)
+        clicks = Map.update!(clicks, :part, fn _ -> 1 end)
+        clicks = Map.update!(clicks, :id, fn _ -> UUID.uuid1 end)
 
-        ExAws.Dynamo.put_item("Clicks", clicks)
-            |> ExAws.request!
-        {:noreply, totals}
+        #Task.async(fn ->
+        Task.start(fn ->
+            ExAws.Dynamo.put_item("Clicks", clicks)
+                |> ExAws.request!
+        end)
     end
 end

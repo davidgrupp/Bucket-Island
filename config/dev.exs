@@ -33,7 +33,7 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 config :ex_aws,
-  debug_requests: true,
+  debug_requests: false,
   region: "us-west-2"
 
 config :ex_aws, :dynamodb,
