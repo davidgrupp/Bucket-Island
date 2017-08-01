@@ -18,6 +18,7 @@ defmodule BucketIsland.Services.ClickTotalsCache do
     def totals(pid), do: GenServer.call(pid, :totals)
 
     def init(_) do
+        Registry.register(:bucket_island_registry, :click_totals_cache, nil)
         current_totals = BucketIsland.Repositories.ClicksRepository.get_current
         {:ok, %{current_totals: current_totals, temp_totals: BucketIsland.Models.ClickTotals.empty} }
     end
@@ -38,7 +39,7 @@ defmodule BucketIsland.Services.ClickTotalsCache do
         end
     end
 
-    def handle_info(x, totals) do
+    def handle_info(_, totals) do
         {:noreply, totals}
     end
 

@@ -9,7 +9,9 @@ defmodule BucketIsland do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
+      supervisor(Registry, [:unique, :bucket_island_registry]),
       supervisor(BucketIsland.Endpoint, []),
+      supervisor(BucketIsland.Services.ClickTotalsCache, []),
       # Start your own worker by calling: BucketIsland.Worker.start_link(arg1, arg2, arg3)
       # worker(BucketIsland.Worker, [arg1, arg2, arg3]),
     ]

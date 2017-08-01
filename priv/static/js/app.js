@@ -29,14 +29,14 @@ var app = function(){
     self.chan.onError(function( e ) {  console.log("something went wrong", e); });
     self.chan.onClose(function( e ) {  console.log("channel closed", e); });
 
-    $input.off("keypress").on("keypress", function( e ) {
+    /*$input.off("keypress").on("keypress", function( e ) {
         if (e.keyCode == 13) {
             //this.chan.push("new:msg", {user: $username.val(), body: $input.val()});
             console.log("keypress chan push new:msg");
             self.chan.push("new:msg", {user: "dwg", body: $input.val() });
             $input.val("");
         }
-    });
+    });*/
 
     $main.click(function(){
         console.log("main click chan push new:click");
