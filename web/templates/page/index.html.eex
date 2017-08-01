@@ -1,9 +1,7 @@
 <link rel="stylesheet" href="<%= static_path(@conn, "/css/animations.css") %>">
 
-<div class="main">
-	<input id="message-input" type="text" />
-	<div class="total-clicks">
-	</div>
+<input id="message-input" type="text" />
+<div class="total-clicks">
 </div>
 
 <script src="<%= static_path(@conn, "/js/island.js") %>"></script>

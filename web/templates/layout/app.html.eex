@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <main role="main" style="margin-top:150px;">
+      <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
 

@@ -51,9 +51,16 @@ svg.svgtext {
 }
 #text:hover{filter:url(#dropshadow)}
 
-
-.main{
-	margin-top: 100px;
+main{
+	position: absolute;
 	width: 100%;
-	background-color: #0cc;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+	background-color: #eee;
+	background-image: url(/images/bi_lrg.jpg);
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-top: 100px;
 }
