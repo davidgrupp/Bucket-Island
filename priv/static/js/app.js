@@ -6,9 +6,7 @@ var app = function(){
     var $messages  = $("#messages");
     var $input     = $("#message-input");
     var $username  = $("#username");
-    var $totalClicks = $(".total-clicks");
-    var $main = $("main");
-    self.clickTotals = {total_clicks: 0};
+    self.clickTotals = {total_clicks: 0, total_bucket_island: 0, total_other_island: 0, total_swamp: 0, total_forest: 0, total_plains: 0, total_mountain: 0};
 
     var sanitize = function(html){ return $("<div/>").text(html).html(); }
 
@@ -22,11 +20,40 @@ var app = function(){
     self.chan.onError(function( e ) {  console.log("something went wrong", e); });
     self.chan.onClose(function( e ) {  console.log("channel closed", e); });
 
-    $main.click(function(){
+    $(".land").click(function(elm){
+        //var landType = this.attributes 
         console.log("main click chan push new:click");
+        var clickType = "bucket_island";
+        var classes = $(this).attr('class').split(/\s+/);
+        $.each(classes, function(index, item) {
+            if (item === 'bucket_island') {
+                self.clickTotals.total_bucket_island++;
+            }
+            else if (item === 'other_island') {
+                self.clickTotals.total_other_island++;
+                clickType = "other_island";
+            }
+            else if (item === 'mountain') {
+                self.clickTotals.total_mountain++;
+                clickType = "mountain";
+            }
+            else if (item === 'swamp') {
+                self.clickTotals.total_swamp++;
+                clickType = "swamp";
+            }
+            else if (item === 'plains') {
+                self.clickTotals.total_plains++;
+                clickType = "plains";
+            }
+            else if (item === 'forest') {
+                self.clickTotals.total_forest++;
+                clickType = "forest";
+            }
+        });
+
+        self.chan.push("new:click", {"user": "dwg", "click_type": clickType, "hash": "123abc_hash_asdf", "next_click_hash": "987abc_hash_qwer"});
         self.clickTotals.total_clicks++;
-        $totalClicks.text(self.clickTotals.total_clicks);
-        self.chan.push("new:click", {"user": "dwg", "hash": "123abc_hash_asdf", "next_click_hash": "987abc_hash_qwer"});
+        self.updateTotals();
     });
 
     self.chan.on("new:msg", function( msg ) {
@@ -37,9 +64,10 @@ var app = function(){
 
     self.chan.on("update:total_clicks", function( msg ) {
        console.log("chan on update:total_clicks", msg.body.total_clicks);
-       if(msg.body.total_clicks > self.clickTotals.total_clicks)
+       if(msg.body.total_clicks >= self.clickTotals.total_clicks)
             self.clickTotals = msg.body;
-       $totalClicks.text(self.clickTotals.total_clicks);
+        
+        self.updateTotals();
     });
 
     self.chan.on("user:entered", function( msg ) {
@@ -47,6 +75,17 @@ var app = function(){
         //var username = sanitize(msg.user || "anonymous")
         //$messages.append(`<br/><i>[${username} entered]</i>`)
     });
+
+
+    self.updateTotals = function(){
+       $(".total_clicks").text(self.clickTotals.total_clicks);
+       $(".total_bucket_island").text(self.clickTotals.total_bucket_island);
+       $(".total_other_island").text(self.clickTotals.total_other_island);
+       $(".total_swamp").text(self.clickTotals.total_swamp);
+       $(".total_forest").text(self.clickTotals.total_forest);
+       $(".total_plains").text(self.clickTotals.total_plains);
+       $(".total_mountain").text(self.clickTotals.total_mountain);
+    }
     
 }
 var a = new app();

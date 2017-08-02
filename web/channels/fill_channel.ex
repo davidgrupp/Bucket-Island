@@ -43,9 +43,17 @@ defmodule BucketIsland.FillChannel do
     {:reply, {:ok, %{msg: msg["body"]}}, assign(socket, :user, msg["user"])}
   end
 
-  def handle_in("new:click",%{"hash" => hash, "next_click_hash" => next_click_hash, "user" => user}, socket) do
+  def handle_in("new:click", %{"click_type" => click_type, "hash" => hash, "next_click_hash" => next_click_hash, "user" => user}, socket) do
     [{pid,_}] = Registry.lookup(:bucket_island_registry, :click_totals_cache)
-    BucketIsland.Services.ClickTotalsCache.increment_bucket_island(pid, 1)
+    handle_click(click_type, pid)
     {:reply, {:ok, %{"next_click_hash": next_click_hash}}, assign(socket, :user, user)}
   end
+
+  defp handle_click("bucket_island", pid), do: BucketIsland.Services.ClickTotalsCache.increment_bucket_island(pid, 1)
+  defp handle_click("other_island", pid), do: BucketIsland.Services.ClickTotalsCache.increment_other_island(pid, 1)
+  defp handle_click("mountain", pid), do: BucketIsland.Services.ClickTotalsCache.increment_mountain(pid, 1)
+  defp handle_click("swamp", pid), do: BucketIsland.Services.ClickTotalsCache.increment_swamp(pid, 1)
+  defp handle_click("plains", pid), do: BucketIsland.Services.ClickTotalsCache.increment_plains(pid, 1)
+  defp handle_click("forest", pid), do: BucketIsland.Services.ClickTotalsCache.increment_forest(pid, 1)
+
 end

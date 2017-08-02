@@ -1,7 +1,44 @@
-<link rel="stylesheet" href="<%= static_path(@conn, "/css/animations.css") %>">
-
-<input id="message-input" type="text" />
-<div class="total-clicks">
+<div class="container totals">
+	<div class="row">
+		<div class="col-lg-2 col-lg-offset-5">
+			<div class="total_clicks">-</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-3">
+			<img class="land bucket_island" src="<%= static_path(@conn, "/images/bi_lrg.jpg") %>"/>
+			<div class="total_bucket_island">-</div>
+		</div>
+		<div class="col-lg-3">
+			<img class="land other_island" src="<%= static_path(@conn, "/images/island_2.jpg") %>"/>
+			<div class="total_other_island">-</div>
+		</div>
+		<div class="col-lg-3"> </div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-3">
+			<img class="land mountain" src='<%= static_path(@conn, "/images/mountain_1.jpg") %>'/>
+			<div class="total_mountain">-</div>
+		</div>
+		<div class="col-lg-3">
+			<img class="land plains" src='<%= static_path(@conn, "/images/plains_1.jpg") %>'/>
+			<div class="total_plains">-</div>
+		</div>
+		<div class="col-lg-3"> </div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-3">
+			<img class="land swamp" src='<%= static_path(@conn, "/images/swamp_1.jpg") %>'/>
+			<div class="total_swamp">-</div>
+		</div>
+		<div class="col-lg-3">
+			<img class="land forest" src='<%= static_path(@conn, "/images/forest_1.JPG") %>'/>
+			<div class="total_forest">-</div>
+		</div>
+		<div class="col-lg-3"> </div>
+	</div>
 </div>
 
 <script src="<%= static_path(@conn, "/js/island.js") %>"></script>
