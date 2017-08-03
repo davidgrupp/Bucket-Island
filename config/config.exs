@@ -18,6 +18,16 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :ex_aws,
+  debug_requests: false,
+  region: "us-west-2"
+
+config :ex_aws, :dynamodb,
+  scheme: "https://",
+  host: "dynamodb.us-west-2.amazonaws.com",
+  port: 443,
+  region: "us-west-2"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
