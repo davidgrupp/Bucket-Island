@@ -17,14 +17,20 @@ body{
 }
 
 .navbar .container{
-	margin-left: 24px;
+	/*margin-left: 24px;
+	width: 92%;*/
 	height: 100px;
-	width: 92%;
 }
 
 .navbar .fa-home{
 	font-size: 50px;
 	color: #333;
+}
+
+.navbar .container h2,
+.navbar .container h5
+{
+	text-align: center;
 }
 
 .island{
@@ -66,5 +72,32 @@ main{
 }
 
 .land{
-	height: 250px;
+	/*height: 250px;*/
+	/*width:150px;*/
+	width: 150px;
+}
+
+.level-progress{
+	height: 10px !important;
+	width: 150px;
+	border-radius: 0px !important;
+	margin-bottom: 2px !important;
+}
+
+.level-progress .progress-bar-info{
+	background-color: #999 !important;
+	background-image: linear-gradient(to bottom,#286090 0,#286090 100%);
+}
+
+.level{
+	font-weight: bold;
+}
+
+.total{
+
+}
+
+.total-clicks{
+	font-weight: bold;
+	font-size: 20px;
 }

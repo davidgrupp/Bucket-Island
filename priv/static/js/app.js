@@ -78,13 +78,20 @@ var app = function(){
 
 
     self.updateTotals = function(){
-       $(".total_clicks").text(self.clickTotals.total_clicks);
-       $(".total_bucket_island").text(self.clickTotals.total_bucket_island);
-       $(".total_other_island").text(self.clickTotals.total_other_island);
-       $(".total_swamp").text(self.clickTotals.total_swamp);
-       $(".total_forest").text(self.clickTotals.total_forest);
-       $(".total_plains").text(self.clickTotals.total_plains);
-       $(".total_mountain").text(self.clickTotals.total_mountain);
+       $(".total_clicks").html("<span class='total total-clicks'>Total: "+ self.clickTotals.total_clicks +"</span>");
+       self.updateClicks('bucket_island', self.clickTotals.total_bucket_island);
+       self.updateClicks('other_island', self.clickTotals.total_other_island);
+       self.updateClicks('mountain', self.clickTotals.total_mountain);
+       self.updateClicks('swamp', self.clickTotals.total_swamp);
+       self.updateClicks('plains', self.clickTotals.total_plains);
+       self.updateClicks('forest', self.clickTotals.total_forest);
+    }
+
+    self.updateClicks = function(clickType, total){
+        var level = Math.ceil(Math.log10(total));
+        $(".total_"+clickType).html("<span class='level'>Level: " + level + "</span> <span class='total'>Total: "+ total +"</span>");
+        var maxLevelProgress = Math.pow(10, Math.ceil(Math.log10(total)));
+        $('.'+clickType+'-level-progress').css('width', (100*total/maxLevelProgress)+'%');
     }
     
 }
