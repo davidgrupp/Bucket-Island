@@ -8,14 +8,14 @@
 		<div class="col-lg-3 col-lg-offset-3">
 			<img class="land bucket_island" src="<%= static_path(@conn, "/images/bi_lrg.jpg") %>"/>
 			<div class="progress level-progress">
-				<div class="progress-bar progress-bar-info bucket_island-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>  
+				<div class="progress-bar progress-bar-info bucket_island-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 			</div>
 			<div class="total_bucket_island"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 		</div>
 		<div class="col-lg-3">
 			<img class="land other_island" src="<%= static_path(@conn, "/images/island_2.jpg") %>"/>
 			<div class="progress level-progress">
-				<div class="progress-bar progress-bar-info other_island-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>  
+				<div class="progress-bar progress-bar-info other_island-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 			</div>
 			<div class="total_other_island"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 		</div>
@@ -26,14 +26,14 @@
 		<div class="col-lg-3 col-lg-offset-3">
 			<img class="land mountain" src='<%= static_path(@conn, "/images/mountain_1.jpg") %>'/>
 			<div class="progress level-progress">
-				<div class="progress-bar progress-bar-info mountain-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>  
+				<div class="progress-bar progress-bar-info mountain-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 			</div>
 			<div class="total_mountain"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 		</div>
 		<div class="col-lg-3">
 			<img class="land plains" src='<%= static_path(@conn, "/images/plains_1.jpg") %>'/>
 			<div class="progress level-progress">
-				<div class="progress-bar progress-bar-info plains-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>  
+				<div class="progress-bar progress-bar-info plains-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 			</div>
 			<div class="total_plains"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 		</div>
@@ -44,14 +44,14 @@
 		<div class="col-lg-3 col-lg-offset-3">
 			<img class="land swamp" src='<%= static_path(@conn, "/images/swamp_1.jpg") %>'/>
 			<div class="progress level-progress">
-				<div class="progress-bar progress-bar-info swamp-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>  
+				<div class="progress-bar progress-bar-info swamp-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 			</div>
 			<div class="total_swamp"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 		</div>
 		<div class="col-lg-3">
 			<img class="land forest" src='<%= static_path(@conn, "/images/forest_1.JPG") %>'/>
 			<div class="progress level-progress">
-				<div class="progress-bar progress-bar-info forest-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>  
+				<div class="progress-bar progress-bar-info forest-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 			</div>
 			<div class="total_forest"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 		</div>
