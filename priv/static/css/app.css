@@ -64,7 +64,6 @@ main{
     left: 0px;
     top: 0px;
 	background-color: #eee;
-	background-image: url(/images/bi_lrg.jpg);
 	background-size: auto 100%;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -74,13 +73,18 @@ main{
 .land{
 	/*height: 250px;*/
 	/*width:150px;*/
-	width: 150px;
-	height: 185px;
+	width: 85px;
+	height: 98px;
+}
+
+.land-lrg{
+	width: 500px;
+	height: 640px;
 }
 
 .level-progress{
 	height: 10px !important;
-	width: 150px;
+	width: 85px;
 	border-radius: 0px !important;
 	margin-bottom: 2px !important;
 	margin-left: auto;
@@ -110,4 +114,13 @@ main{
 .total-clicks{
 	font-weight: bold;
 	font-size: 20px;
+}
+
+.main-clicker{
+	display: none;
+}
+
+.initial-selection-main{
+	padding-top: 75px;
+	font-size: 24px;
 }

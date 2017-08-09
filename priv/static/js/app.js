@@ -20,9 +20,16 @@ var app = function(){
     self.chan.onError(function( e ) {  console.log("something went wrong", e); });
     self.chan.onClose(function( e ) {  console.log("channel closed", e); });
 
-    $(".land").click(function(elm){
+    $(".land").click(function(){
+        $('.initial-selection-main').hide();;
+        $(".land-lrg").hide();
+        var classes = $(this).attr('class').split(/\s+/);
+        $("."+classes[1]).show();
+    });
+
+    $(".land-lrg").click(function(elm){
         //var landType = this.attributes 
-        console.log("main click chan push new:click");
+        //console.log("main click chan push new:click");
         var clickType = "bucket_island";
         var classes = $(this).attr('class').split(/\s+/);
         $.each(classes, function(index, item) {

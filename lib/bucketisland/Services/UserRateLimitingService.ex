@@ -16,7 +16,7 @@ defmodule BucketIsland.Services.UserRateLimitingService do
                 clicks_per_second: %BucketIsland.Models.RateLimit {},
                 clicks_per_minute: %BucketIsland.Models.RateLimit {},
                 clicks_per_hour: %BucketIsland.Models.RateLimit {},
-                clicks_per_hour: %BucketIsland.Models.RateLimit {} }
+                clicks_per_hour: %BucketIsland.Models.RateLimit {} } }
     end
 
     def handle_call(:exceeded_limits, _from, limits) do
@@ -25,7 +25,8 @@ defmodule BucketIsland.Services.UserRateLimitingService do
 
         update_rate_limits(limits.clicks_per_second, date_diff, now, 1000, @maxClicksPerSecond)
 
-        {:reply, merged, totals}
+        #{:reply, merged, totals}
+        {:reply, {}, limits}
     end
 
     def update_rate_limits(rate_limits, date_diff, now, milliseconds_per_timespan, max_clicks) do
@@ -37,15 +38,16 @@ defmodule BucketIsland.Services.UserRateLimitingService do
             new_increment = -1 * times_exceeded_timespan
         end
         rate_limits = update_limit_run(rate_limits, times_exceeded_timespan)
-        new_total = rate_limit.total + new_increment
+        #new_total = rate_limit.total + new_increment
     end
 
-    def update_limit_run(rate_limits, times_exceeded_timespan) do
-        Map.update(Map.update, :pos_run, fn _ -> 0 end)
+    def update_limit_run(rate_limit, times_exceeded_timespan) do
+        Map.update(rate_limit, :pos_run, fn _ -> 0 end)
         |> Map.update(:neg_run, & &1 -1)
     end
-    def update_limit_run(rate_limits, 0) do
-        Map.update(Map.update, :pos_run, & &1 -1)
+
+    def update_limit_run(rate_limit, 0) do
+        Map.update(rate_limit, :pos_run, & &1 -1)
         |> Map.update(:neg_run, fn _ -> 0 end)
     end
 end
