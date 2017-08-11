@@ -2,7 +2,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h2>Global Totals:</h2>
-			<div class="total_clicks"><span class='total total-clicks'>Clicks: -</span> <span class='total total-players'>Players: -</span></div>
+			<div class="total_clicks">
+				<span class='total total-clicks'>Clicks: <%= @click_totals.total_clicks %></span> 
+				<span class='total total-players'>Players: <%= @team_counts.total %></span>
+			</div>
 		</div>
 	</div>
 	<div class="row">
