@@ -1,7 +1,7 @@
 <div class="container totals">
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="total_clicks"><span class='total total-clicks'>Total: -</span></div>
+			<div class="total_clicks"><span class='total total-clicks'>Total Clicks: -</span><span class='total total-players'>Total Players: -</span></div>
 		</div>
 	</div>
 	<div class="row">
@@ -11,12 +11,13 @@
 				<div class="progress level-progress">
 					<div class="progress-bar progress-bar-info <%= click_type %>-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
 				</div>
+				<div class="team team-<%= click_type %>">Team <%= click_type %>: <span class="team-players-count">-</span></div>
 				<div class="total_<%= click_type %>"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 			</div>
 		<%= end %>
 	</div>
 	<div class="row initial-selection-main">
-		SELECT A LAND AND BEGIN CLICKING!
+		SELECT A TEAM AND BEGIN CLICKING!
 	</div>
 	<%= for click_type <- ["bucket_island", "other_island", "mountain", "plains", "swamp", "forest"] do %>
 		<div class="row main-clicker <%= click_type %>">

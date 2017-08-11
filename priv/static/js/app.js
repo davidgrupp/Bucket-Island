@@ -6,7 +6,9 @@ var app = function(){
     var $messages  = $("#messages");
     var $input     = $("#message-input");
     var $username  = $("#username");
-    self.clickTotals = {total_clicks: 0, total_bucket_island: 0, total_other_island: 0, total_swamp: 0, total_forest: 0, total_plains: 0, total_mountain: 0};
+    self.clickTotals = {"total_clicks": 0, "total_bucket_island": 0, "total_other_island": 0, "total_swamp": 0, "total_forest": 0, "total_plains": 0, "total_mountain": 0};
+    self.teamTotals = { "total": 0, "bucket_island": 0, "other_island": 0, "swamp": 0, "forest": 0, "plains": 0, "mountain": 0};
+    self.team = null;
 
     var sanitize = function(html){ return $("<div/>").text(html).html(); }
 
@@ -24,42 +26,22 @@ var app = function(){
         $('.initial-selection-main').hide();;
         $(".land-lrg").hide();
         var classes = $(this).attr('class').split(/\s+/);
-        $("."+classes[1]).show();
+        var clickType = classes[1];
+        $("."+clickType).show();
+        --self.teamTotals[self.team];
+        ++self.teamTotals[clickType];
+        if(self.team == null) self.teamTotals.total++;
+        self.team = clickType;
+        self.chan.push("new:jointeam", {"team": clickType});
+        self.updateTeams();
     });
 
     $(".land-lrg").click(function(elm){
-        //var landType = this.attributes 
-        //console.log("main click chan push new:click");
-        var clickType = "bucket_island";
         var classes = $(this).attr('class').split(/\s+/);
-        $.each(classes, function(index, item) {
-            if (item === 'bucket_island') {
-                self.clickTotals.total_bucket_island++;
-            }
-            else if (item === 'other_island') {
-                self.clickTotals.total_other_island++;
-                clickType = "other_island";
-            }
-            else if (item === 'mountain') {
-                self.clickTotals.total_mountain++;
-                clickType = "mountain";
-            }
-            else if (item === 'swamp') {
-                self.clickTotals.total_swamp++;
-                clickType = "swamp";
-            }
-            else if (item === 'plains') {
-                self.clickTotals.total_plains++;
-                clickType = "plains";
-            }
-            else if (item === 'forest') {
-                self.clickTotals.total_forest++;
-                clickType = "forest";
-            }
-        });
-
-        self.chan.push("new:click", {"user": "dwg", "click_type": clickType, "hash": "123abc_hash_asdf", "next_click_hash": "987abc_hash_qwer"});
-        self.clickTotals.total_clicks++;
+        var clickType = classes[1];
+        ++self.clickTotals["total_"+clickType];
+        ++self.clickTotals.total_clicks;
+        self.chan.push("new:click", {});
         self.updateTotals();
     });
 
@@ -70,10 +52,15 @@ var app = function(){
     });
 
     self.chan.on("update:total_clicks", function( msg ) {
-       console.log("chan on update:total_clicks", msg.body.total_clicks);
+       //console.log("chan on update:total_clicks", msg.body.total_clicks);
        if(msg.body.total_clicks >= self.clickTotals.total_clicks)
             self.clickTotals = msg.body;
-        
+        self.updateTeams();
+    });
+
+    self.chan.on("update:team_counts", function( msg ) {
+       //console.log("chan on update:team_counts", msg.body);
+       self.teamTotals = msg.body;
         self.updateTotals();
     });
 
@@ -100,6 +87,20 @@ var app = function(){
         $(".total_"+clickType+" .total").text("Total: "+ total);
         var maxLevelProgress = Math.pow(10, Math.ceil(Math.log10(total)));
         $('.'+clickType+'-level-progress').css('width', (100*total/maxLevelProgress)+'%');
+    }
+
+    self.updateTeams = function(){
+       $(".total_clicks .total-players").text("Total: "+ self.teamTotals.total);
+       self.updateTeam('bucket_island', self.teamTotals.bucket_island);
+       self.updateTeam('other_island', self.teamTotals.other_island);
+       self.updateTeam('mountain', self.teamTotals.mountain);
+       self.updateTeam('swamp', self.teamTotals.swamp);
+       self.updateTeam('plains', self.teamTotals.plains);
+       self.updateTeam('forest', self.teamTotals.forest);
+    }
+
+    self.updateTeam = function(clickType, total){
+        $(".team-"+clickType+" .team-players-count").text(total);
     }
     
 }
