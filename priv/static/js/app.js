@@ -72,7 +72,7 @@ var app = function(){
 
 
     self.updateTotals = function(){
-       $(".total_clicks .total-clicks").text("Total: "+ self.clickTotals.total_clicks);
+       $(".total_clicks .total-clicks").text("Clicks: "+ self.clickTotals.total_clicks);
        self.updateClicks('bucket_island', self.clickTotals.total_bucket_island);
        self.updateClicks('other_island', self.clickTotals.total_other_island);
        self.updateClicks('mountain', self.clickTotals.total_mountain);
@@ -90,7 +90,7 @@ var app = function(){
     }
 
     self.updateTeams = function(){
-       $(".total_clicks .total-players").text("Total: "+ self.teamTotals.total);
+       $(".total_clicks .total-players").text("Players: "+ self.teamTotals.total);
        self.updateTeam('bucket_island', self.teamTotals.bucket_island);
        self.updateTeam('other_island', self.teamTotals.other_island);
        self.updateTeam('mountain', self.teamTotals.mountain);
