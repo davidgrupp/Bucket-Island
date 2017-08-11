@@ -13,6 +13,7 @@ defmodule BucketIsland do
       #supervisor(Registry, [:duplicate, :user_rate_limiting_registry]),
       supervisor(BucketIsland.Endpoint, []),
       supervisor(BucketIsland.Services.ClickTotalsCache, []),
+      supervisor(BucketIsland.Services.TeamSelectionCache, [])
       # Start your own worker by calling: BucketIsland.Worker.start_link(arg1, arg2, arg3)
       # worker(BucketIsland.Worker, [arg1, arg2, arg3]),
     ]
