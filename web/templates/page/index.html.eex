@@ -11,12 +11,31 @@
 	<div class="row">
 		<%= for click_type <- ["bucket_island", "other_island", "mountain", "plains", "swamp", "forest"] do %>
 			<div class="col-lg-2">
+				<div class="team-overview <%= click_type %>">
+					<div class="team team-<%= click_type %>">
+						<%= get_pretty_type(click_type) %>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 player-header">Players: </div>
+						<div class="col-lg-1 team-players-count"><%= Map.get(@team_counts,String.to_atom( click_type ) ) %></div>
+					</div>
+					<div class="row">
+						<div class='col-lg-6 level-header'>Level: </div> 
+						<div class='col-lg-1 level'><%= get_team_level( Map.get(@click_totals,String.to_atom( "total_#{click_type}" ) ) ) %></div>
+					</div>
+					<div class="row">
+						<div class='col-lg-6 total-header'>Total:</div> 
+						<div class='col-lg-1 team-click-total'><%= Map.get(@click_totals,String.to_atom( "total_#{click_type}" ) ) %></div>
+					</div>
+				</div>
 				<img class="land <%= click_type %>" src="<%= static_path(@conn, "/images/#{click_type}_1.jpg") %>"/>
 				<div class="progress level-progress">
-					<div class="progress-bar progress-bar-info <%= click_type %>-level-progress" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 1%;"></div>  
+					<div class="progress-bar progress-bar-info <%= click_type %>-level-progress"
+						role="progressbar"
+						aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+						style="width: <%= get_level_progress(Map.get(@click_totals,String.to_atom( "total_#{click_type}" ) )) %>%;"
+						></div>  
 				</div>
-				<div class="team team-<%= click_type %>">Team <%= get_pretty_type(click_type) %>: <span class="team-players-count">-</span></div>
-				<div class="total_<%= click_type %>"><span class='level'>Level: -</span> <span class='total'>Total: -</span></div>
 			</div>
 		<%= end %>
 	</div>
@@ -31,3 +50,7 @@
 </div>
 
 <script src="<%= static_path(@conn, "/js/island.js") %>"></script>
+<script>
+	var init_click_totals = <%= {:safe,  to_json( @click_totals ) } %>;
+	var init_team_counts = <%= {:safe, to_json( @team_counts ) } %>;
+</script>

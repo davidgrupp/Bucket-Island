@@ -6,8 +6,8 @@ var app = function(){
     var $messages  = $("#messages");
     var $input     = $("#message-input");
     var $username  = $("#username");
-    self.clickTotals = {"total_clicks": 0, "total_bucket_island": 0, "total_other_island": 0, "total_swamp": 0, "total_forest": 0, "total_plains": 0, "total_mountain": 0};
-    self.teamTotals = { "total": 0, "bucket_island": 0, "other_island": 0, "swamp": 0, "forest": 0, "plains": 0, "mountain": 0};
+    self.clickTotals = init_click_totals; //{"total_clicks": 0, "total_bucket_island": 0, "total_other_island": 0, "total_swamp": 0, "total_forest": 0, "total_plains": 0, "total_mountain": 0};
+    self.teamTotals = init_team_counts;//{ "total": 0, "bucket_island": 0, "other_island": 0, "swamp": 0, "forest": 0, "plains": 0, "mountain": 0};
     self.team = null;
 
     var sanitize = function(html){ return $("<div/>").text(html).html(); }
@@ -22,7 +22,7 @@ var app = function(){
     self.chan.onError(function( e ) {  console.log("something went wrong", e); });
     self.chan.onClose(function( e ) {  console.log("channel closed", e); });
 
-    $(".land").click(function(){
+    $(".team-overview").click(function(){
         $('.initial-selection-main').hide();;
         $(".land-lrg").hide();
         var classes = $(this).attr('class').split(/\s+/);
@@ -72,7 +72,7 @@ var app = function(){
 
 
     self.updateTotals = function(){
-       $(".total_clicks .total-clicks").text("Clicks: "+ self.clickTotals.total_clicks);
+       $(".total-clicks").text("Clicks: "+ self.clickTotals.total_clicks);
        self.updateClicks('bucket_island', self.clickTotals.total_bucket_island);
        self.updateClicks('other_island', self.clickTotals.total_other_island);
        self.updateClicks('mountain', self.clickTotals.total_mountain);
@@ -83,14 +83,14 @@ var app = function(){
 
     self.updateClicks = function(clickType, total){
         var level = Math.ceil(Math.log10(total));
-        $(".total_"+clickType+" .level").text("Level: "+ level);
-        $(".total_"+clickType+" .total").text("Total: "+ total);
+        $("."+clickType+" .level").text(level);
+        $("."+clickType+" .team-click-total").text(total);
         var maxLevelProgress = Math.pow(10, Math.ceil(Math.log10(total)));
         $('.'+clickType+'-level-progress').css('width', (100*total/maxLevelProgress)+'%');
     }
 
     self.updateTeams = function(){
-       $(".total_clicks .total-players").text("Players: "+ self.teamTotals.total);
+       $(".total-players").text("Players: "+ self.teamTotals.total);
        self.updateTeam('bucket_island', self.teamTotals.bucket_island);
        self.updateTeam('other_island', self.teamTotals.other_island);
        self.updateTeam('mountain', self.teamTotals.mountain);
@@ -100,7 +100,7 @@ var app = function(){
     }
 
     self.updateTeam = function(clickType, total){
-        $(".team-"+clickType+" .team-players-count").text(total);
+        $("."+clickType+" .team-players-count").text(total);
     }
     
 }

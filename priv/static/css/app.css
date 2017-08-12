@@ -1,5 +1,6 @@
 body{
 	background-color: #eee;
+	font-family: 'Open Sans', sans-serif !important;
 }
 
 .navbar{
@@ -73,8 +74,8 @@ main{
 .land{
 	/*height: 250px;*/
 	/*width:150px;*/
-	width: 85px;
-	height: 98px;
+	width: 125px;
+	height: 160px;
 }
 
 .land-lrg{
@@ -83,8 +84,8 @@ main{
 }
 
 .level-progress{
-	height: 10px !important;
-	width: 85px;
+	height: 9px !important;
+	width: 125px;
 	border-radius: 0px !important;
 	margin-bottom: 2px !important;
 	margin-left: auto;
@@ -97,13 +98,13 @@ main{
 }
 
 .totals{
-	width: 600px !important;
+	width: 900px !important;
 	margin-left: auto;
 	margin-right: auto; 
 	text-align: center;
 }
 
-.level{
+.level-header{
 	font-weight: bold;
 }
 
@@ -119,4 +120,27 @@ main{
 .initial-selection-main{
 	padding-top: 75px;
 	font-size: 24px;
+}
+
+.team-overview{
+	position: absolute;
+	background: rgba(0, 0, 0, .5);
+	width: 125px;
+	height: 160px;
+	color: #eee;
+	text-align: left;
+	padding-left: 8px;
+	padding-top: 8px;
+}
+
+.total-header,
+.player-header,
+.team{
+	font-weight: bold;
+}
+
+.team{
+	text-align: center;
+	margin: auto;
+	text-decoration: underline;
 }
