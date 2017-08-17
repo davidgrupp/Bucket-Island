@@ -5,8 +5,8 @@ defmodule BucketIsland.FillChannel do
   def join("fill:lobby", message, socket) do
     Process.flag(:trap_exit, true)
     #:timer.send_interval(5000, :ping)
-    :timer.send_interval(3333, :total_clicks)
-    :timer.send_interval(2000, :team_counts)
+    :timer.send_interval(333, :total_clicks)
+    :timer.send_interval(500, :team_counts)
     send(self, {:after_join, message})
 
     {:ok, socket}
