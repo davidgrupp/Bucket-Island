@@ -37,6 +37,7 @@ defmodule BucketIsland.Mixfile do
      {:ex_aws, "~> 1.0"},
      {:poison, "~> 2.0"},
      {:hackney, "== 1.8.0", override: true},
-     {:uuid, "~> 1.1"}]
+     {:uuid, "~> 1.1"},
+     {:cipher, ">= 1.3.2"}]
   end
 end

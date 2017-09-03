@@ -11,7 +11,6 @@ defmodule BucketIsland.Services.UserRateLimitingService do
     end
 
     def init(user_id) do
-        Registry.register(:user_rate_limiting_registry, {:click_totals_cache, user_id}, nil)
         {:ok, %{last_date: DateTime.utc_now,
                 clicks_per_second: %BucketIsland.Models.RateLimit {},
                 clicks_per_minute: %BucketIsland.Models.RateLimit {},

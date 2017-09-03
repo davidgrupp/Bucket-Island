@@ -16,7 +16,7 @@ var app = function(){
     self.socket.onError( function( ev ) { console.log("ERROR", ev); } );
     self.socket.onClose( function( e ) {  console.log("CLOSE", e); } );
 
-    self.chan = self.socket.channel("fill:lobby", {})
+    self.chan = self.socket.channel("fill:lobby", {"user_id": user_id})
     self.chan.join().receive("ignore", function() { console.log("auth error"); })
                 .receive("ok", function() { console.log("join ok"); });
     self.chan.onError(function( e ) {  console.log("something went wrong", e); });

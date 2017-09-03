@@ -2,13 +2,18 @@ defmodule BucketIsland.FillChannel do
   use Phoenix.Channel
   require Logger
 
-  def join("fill:lobby", message, socket) do
+  def join("fill:lobby", %{"user_id"=> user_id}, socket) do
     Process.flag(:trap_exit, true)
     #:timer.send_interval(5000, :ping)
     :timer.send_interval(3333, :total_clicks)
     :timer.send_interval(2000, :team_counts)
-    send(self, {:after_join, message})
-
+    #send(self, {:after_join, message})
+    {:ok, %{"user_id" => user_id} } = Cipher.parse(user_id)
+    rl_pid = BucketIsland.Services.UserRateLimitingService.start_link(user_id)
+    socket =
+    socket
+    |> assign(:user_id, user_id)
+    |> assign(:rl_pid, rl_pid)
     {:ok, socket}
   end
 

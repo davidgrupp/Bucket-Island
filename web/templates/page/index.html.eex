@@ -53,4 +53,5 @@
 <script>
 	var init_click_totals = <%= {:safe,  to_json( @click_totals ) } %>;
 	var init_team_counts = <%= {:safe, to_json( @team_counts ) } %>;
+	var user_id = <%= {:safe, to_json( @user_id ) } %>;
 </script>
