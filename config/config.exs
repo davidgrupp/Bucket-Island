@@ -28,6 +28,12 @@ config :ex_aws, :dynamodb,
   port: 443,
   region: "us-west-2"
 
+
+config :bucketisland,
+  total_clicks_interval: 3000,
+  team_counts_interval: 3000,
+  click_totals_cache_commit_interval: 60_000
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

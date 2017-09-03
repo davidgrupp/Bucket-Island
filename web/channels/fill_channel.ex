@@ -5,9 +5,9 @@ defmodule BucketIsland.FillChannel do
   def join("fill:lobby", %{"user_id"=> user_id}, socket) do
     Process.flag(:trap_exit, true)
     #:timer.send_interval(5000, :ping)
-
-    :timer.send_interval(3333, :total_clicks)
-    :timer.send_interval(2000, :team_counts)
+    
+    :timer.send_interval(Application.get_env(:bucketisland, :total_clicks_interval), :total_clicks)
+    :timer.send_interval(Application.get_env(:bucketisland, :team_counts_interval), :team_counts)
     #send(self, {:after_join, message})
     {:ok, %{"user_id" => user_id} } = Cipher.parse(user_id)
     rl_pid = BucketIsland.Services.UserRateLimitingService.start_link(user_id)

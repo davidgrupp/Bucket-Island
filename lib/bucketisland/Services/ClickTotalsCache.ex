@@ -1,11 +1,9 @@
 defmodule BucketIsland.Services.ClickTotalsCache do
     use GenServer
-    
-    @timeout 60*1000
 
     def start_link() do
         {:ok, pid} = GenServer.start_link(__MODULE__, :ok, [])
-        :timer.send_interval(@timeout, pid, :commit)
+        :timer.send_interval(Application.get_env(:bucketisland, :click_totals_cache_commit_interval), pid, :commit)
         {:ok, pid}
     end
 
