@@ -32,7 +32,9 @@ config :ex_aws, :dynamodb,
 config :bucketisland,
   total_clicks_interval: 3000,
   team_counts_interval: 3000,
-  click_totals_cache_commit_interval: 60_000
+  click_totals_cache_commit_interval: 60_000,
+  click_totals_cache_user_commit_interval: 300_000,
+  click_totals_table_name: "ClickTotals"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

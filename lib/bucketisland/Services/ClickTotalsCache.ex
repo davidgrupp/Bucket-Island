@@ -2,8 +2,14 @@ defmodule BucketIsland.Services.ClickTotalsCache do
     use GenServer
 
     def start_link() do
-        {:ok, pid} = GenServer.start_link(__MODULE__, :ok, [])
+        {:ok, pid} = GenServer.start_link(__MODULE__, "1")
         :timer.send_interval(Application.get_env(:bucketisland, :click_totals_cache_commit_interval), pid, :commit)
+        {:ok, pid}
+    end
+
+    def start_link(user_id) do
+        {:ok, pid} = GenServer.start_link(__MODULE__, user_id)
+        :timer.send_interval(Application.get_env(:bucketisland, :click_totals_cache_user_commit_interval), pid, :commit)
         {:ok, pid}
     end
 
@@ -14,11 +20,28 @@ defmodule BucketIsland.Services.ClickTotalsCache do
     def increment_plains(pid, increment), do: GenServer.cast(pid, {:increment_plains, increment})
     def increment_mountain(pid, increment), do: GenServer.cast(pid, {:increment_mountain, increment})
     def totals(pid), do: GenServer.call(pid, :totals)
+    def commit(pid) when is_pid(pid), do: GenServer.call(pid, :commit)
 
-    def init(_) do
+    def commit(totals) do
+        temp_totals_clicks = BucketIsland.Models.ClickTotals.update_total_clicks(totals.temp_totals)
+        if temp_totals_clicks.total_clicks > 0 do
+            new_current = BucketIsland.Models.ClickTotals.merge(totals.current_totals, totals.temp_totals)
+            BucketIsland.Repositories.ClicksRepository.create(new_current)
+            {:noreply, %{current_totals: new_current, temp_totals: BucketIsland.Models.ClickTotals.empty(totals.part)}}
+        else
+            {:noreply, totals}
+        end
+    end 
+
+    def init("1") do
         Registry.register(:bucket_island_registry, :click_totals_cache, nil)
-        current_totals = BucketIsland.Repositories.ClicksRepository.get_current
-        {:ok, %{current_totals: current_totals, temp_totals: BucketIsland.Models.ClickTotals.empty} }
+        current_totals = BucketIsland.Repositories.ClicksRepository.get_current("1")
+        {:ok, %{current_totals: current_totals, temp_totals: BucketIsland.Models.ClickTotals.empty("1")} }
+    end
+
+    def init(user_id) do
+        current_totals = BucketIsland.Repositories.ClicksRepository.get_current(user_id)
+        {:ok, %{current_totals: current_totals, temp_totals: BucketIsland.Models.ClickTotals.empty(user_id)} }
     end
 
     def handle_call(:totals, _from, totals) do
@@ -26,15 +49,12 @@ defmodule BucketIsland.Services.ClickTotalsCache do
         {:reply, merged, totals}
     end
 
+    def handle_call(:commit, _from, totals) do
+        commit(totals)
+    end
+
     def handle_info(:commit, totals) do
-        temp_totals_clicks = BucketIsland.Models.ClickTotals.update_total_clicks(totals.temp_totals)
-        if temp_totals_clicks.total_clicks > 0 do
-            new_current = BucketIsland.Models.ClickTotals.merge(totals.current_totals, totals.temp_totals)
-            BucketIsland.Repositories.ClicksRepository.create(new_current)
-            {:noreply, %{current_totals: new_current, temp_totals: BucketIsland.Models.ClickTotals.empty}}
-        else
-            {:noreply, totals}
-        end
+        commit(totals)
     end
 
     def handle_info(_, totals) do

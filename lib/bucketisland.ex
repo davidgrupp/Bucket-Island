@@ -5,7 +5,7 @@ defmodule BucketIsland do
   # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec
-
+    IO.puts("asdf")
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts

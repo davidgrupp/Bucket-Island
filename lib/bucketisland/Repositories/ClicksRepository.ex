@@ -1,11 +1,14 @@
 defmodule BucketIsland.Repositories.ClicksRepository do
-    def get_current() do
+
+    @table_name Application.get_env(:bucketisland, :click_totals_table_name)
+
+    def get_current(partition) do
         %{"Items" => [result]} =
-            ExAws.Dynamo.query("Clicks",
+            ExAws.Dynamo.query(@table_name,
                 limit: 1,
                 scan_index_forward: false,
                 key_condition_expression: "part = :part",
-                expression_attribute_values: [part: 1],
+                expression_attribute_values: [part: partition],
                 index_name: "part-total_clicks-index")
             |> ExAws.request!
 
@@ -22,12 +25,11 @@ defmodule BucketIsland.Repositories.ClicksRepository do
 
     def create(clicks) do
         clicks = BucketIsland.Models.ClickTotals.update_total_clicks(clicks)
-        clicks = Map.update!(clicks, :part, fn _ -> 1 end)
         clicks = Map.update!(clicks, :id, fn _ -> UUID.uuid1 end)
 
         #Task.async(fn ->
         Task.start(fn ->
-            ExAws.Dynamo.put_item("Clicks", clicks)
+            ExAws.Dynamo.put_item(@table_name, clicks)
                 |> ExAws.request!
         end)
     end

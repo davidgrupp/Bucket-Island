@@ -2,11 +2,14 @@ defmodule BucketIsland.Services.TeamSelectionCache do
     use GenServer
     
     def start_link() do
-        GenServer.start_link(__MODULE__, :ok, [])
+        IO.puts("TeamSelectionCache: start_link")
+        GenServer.start_link(__MODULE__, {})
     end
 
     def init(_) do
+        IO.puts("TeamSelectionCache: init")
         Registry.register(:bucket_island_registry, :team_selection_cache, nil)
+        IO.puts("TeamSelectionCache: register")
         {:ok, %{ total: 0, bucket_island: 0, other_island: 0, forest: 0, mountain: 0, plains: 0, swamp: 0 } }
     end
 

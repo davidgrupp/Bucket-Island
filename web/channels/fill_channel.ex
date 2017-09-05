@@ -11,10 +11,12 @@ defmodule BucketIsland.FillChannel do
     #send(self, {:after_join, message})
     {:ok, %{"user_id" => user_id} } = Cipher.parse(user_id)
     rl_pid = BucketIsland.Services.UserRateLimitingService.start_link(user_id)
+    ct_pid = BucketIsland.Services.ClickTotalsCache.start_link(user_id)
     socket =
     socket
     |> assign(:user_id, user_id)
     |> assign(:rl_pid, rl_pid)
+    |> assign(:ct_pid, ct_pid)
 	
     {:ok, socket}
   end
@@ -46,6 +48,7 @@ defmodule BucketIsland.FillChannel do
   def terminate(reason, socket) do
     [{pid,_}] = Registry.lookup(:bucket_island_registry, :team_selection_cache)
     BucketIsland.Services.TeamSelectionCache.leave_team(pid, socket.assigns[:team])
+    BucketIsland.Services.ClickTotalsCache.commit(socket.assigns[:ct_pid])
     Logger.debug"> leave #{inspect reason}"
     :ok
   end

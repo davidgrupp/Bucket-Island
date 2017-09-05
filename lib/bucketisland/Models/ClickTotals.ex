@@ -7,7 +7,7 @@ defmodule BucketIsland.Models.ClickTotals do
         Map.update!(totals, :total_clicks, fn _ -> total_clicks end)
     end
 
-    def empty do
+    def empty(user_id) do
         %BucketIsland.Models.ClickTotals{
             total_bucket_island: 0,
             total_other_island: 0,
@@ -15,7 +15,8 @@ defmodule BucketIsland.Models.ClickTotals do
             total_forest: 0,
             total_plains: 0,
             total_mountain: 0,
-            total_clicks: 0
+            total_clicks: 0,
+            part: user_id
         }
     end
 
@@ -26,7 +27,8 @@ defmodule BucketIsland.Models.ClickTotals do
             total_swamp: clicks1.total_swamp + clicks2.total_swamp,
             total_forest: clicks1.total_forest + clicks2.total_forest,
             total_plains: clicks1.total_plains + clicks2.total_plains,
-            total_mountain: clicks1.total_mountain + clicks2.total_mountain
+            total_mountain: clicks1.total_mountain + clicks2.total_mountain,
+            part: clicks1.part
         }
         update_total_clicks(merged)
     end
