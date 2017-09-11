@@ -10,8 +10,8 @@ defmodule BucketIsland.FillChannel do
     :timer.send_interval(Application.get_env(:bucketisland, :team_counts_interval), :team_counts)
     #send(self, {:after_join, message})
     {:ok, %{"user_id" => user_id} } = Cipher.parse(user_id)
-    rl_pid = BucketIsland.Services.UserRateLimitingService.start_link(user_id)
-    ct_pid = BucketIsland.Services.ClickTotalsCache.start_link(user_id)
+    {:ok, rl_pid} = BucketIsland.Services.UserRateLimitingService.start_link(user_id)
+    {:ok, ct_pid} = BucketIsland.Services.ClickTotalsCache.start_link(user_id)
     socket =
     socket
     |> assign(:user_id, user_id)
@@ -57,6 +57,7 @@ defmodule BucketIsland.FillChannel do
     [{pid,_}] = Registry.lookup(:bucket_island_registry, :click_totals_cache)
     click_type = socket.assigns[:team]
     handle_click(click_type, pid)
+    handle_click(click_type, socket.assigns[:ct_pid])
     {:noreply, socket}
   end
 
